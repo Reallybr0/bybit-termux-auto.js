@@ -1,34 +1,79 @@
-#!/data/data/com.termux/files/usr/bin/bash
+#!/bin/bash
 
-# ၁။ Bybit App ကို အလိုအလျောက် စတင်ဖွင့်လှစ်ခြင်း
-echo "🔄 Bybit App ကို လှမ်းဖွင့်နေပါပြီ..."
+# ANSI Color Codes (အရောင်အလှဆင်ခြင်း)
+GREEN='\033[0;32m'
+BLUE='\033[0;34m'
+YELLOW='\033[1;33m'
+PURPLE='\033[0;35m'
+NC='\033[0m' # No Color
+
+echo -e "${BLUE}[ℹ️] Sending launch command to Bybit App...${NC}"
+# ၁။ Bybit App ကို လှမ်းဖွင့်ခြင်း
 adb shell monkey -p com.bybit.app -c android.intent.category.LAUNCHER 1
-sleep 6 # App ပွင့်လာပြီး ကြော်ငြာ overlay တွေ ပျောက်သွားအောင် ၆ စက္ကန့် စောင့်ပေးပါမယ်
 
-# ၂။ ဘယ်ဘက်အပေါ်ထောင့်က Profile ပုံကို နှိပ်ခြင်း
-echo "👤 Profile ထဲသို့ ဝင်နေပါပြီ..."
-adb shell input tap 75 75
-sleep 3 # Profile Page ပွင့်လာအောင် စောင့်ခြင်း
+# ⏳ App ပွင့်ပြီး စာမျက်နှာ Reload ဖြစ်အောင် ၃၀ စက္ကန့် စောင့်ခြင်း
+echo -e "${YELLOW}[⏳] App ပွင့်သွားပါပြီ။ Home Screen ပေါ်လာရန် 30 စက္ကန့် စောင့်ဆိုင်းနေပါသည်...${NC}"
+sleep 30
 
-# ၃။ Rewards Hub ခလုတ်ကို နှိပ်ခြင်း
-echo "🎁 Rewards Hub ကို နှိပ်နေပါပြီ..."
-adb shell input tap 700 450
-sleep 5 # Rewards Hub Page က loaded ဖြစ်တာ နှေးတတ်လို့ ၅ စက္ကန့် စောင့်ခြင်း
+# ၂။ ဗီဒီယိုအတိုင်း Rewards Hub ထဲသို့ ဝင်ရန် နှိပ်ခြင်း
+echo -e "${BLUE}[🕹️] Step 1: Entering 'Rewards Hub'...${NC}"
+adb shell input tap 180 460
+echo -e "${YELLOW}[⏳] Rewards Hub Loading... 30 စက္ကန့် စောင့်ဆိုင်းနေပါသည်...${NC}"
+sleep 30
 
-# ၄။ My Rewards Tab ထဲသို့ ဝင်ခြင်း
-echo "📂 My Rewards သို့ ကူးပြောင်းနေပါပြီ..."
-adb shell input tap 620 160
-sleep 4 # Rewards စာရင်း ပွင့်လာအောင် စောင့်ခြင်း
+# ၃။ ညာဘက်အပေါ်ထောင့်နားက "My Rewards" (စာအိတ်ပုံစံ) ကို နှိပ်ခြင်း
+echo -e "${BLUE}[🕹️] Step 2: Clicking 'My Rewards' icon...${NC}"
+adb shell input tap 830 115
+echo -e "${YELLOW}[⏳] My Rewards Page Loading... 25 စက္ကန့် စောင့်ဆိုင်းနေပါသည်...${NC}"
+sleep 25
 
-# ၅။ ပထမဆုံးအပေါ်ဆုံးက 'Claim' ခလုတ်ကို နှိပ်ခြင်း (6 OPG)
-echo "💰 ပထမဆုံး Reward ကို Claim နှိပ်နေပါပြီ..."
-adb shell input tap 920 170
-sleep 4 # အောင်မြင်/မအောင်မြင် ပေါ့ပ်အပ်တက်လာတာကို စောင့်ခြင်း
+# ၄။ သီးသန့် "Available" Tab ကို ရွေးချယ်နှိပ်ခြင်း
+echo -e "${BLUE}[🕹️] Step 3: Clicking 'Available' Tab...${NC}"
+adb shell input tap 290 170
+echo -e "${YELLOW}[⏳] Available List Loading... 30 စက္ကန့် စောင့်ဆိုင်းနေပါသည်...${NC}"
+sleep 30
 
-# ၆။ ခလုတ်နှိပ်ပြီးနောက် တက်လာမည့် Overlay ပေါ့ပ်အပ်ကို ပိတ်ခြင်း (သို့) 'Done' နှိပ်ခြင်း
-echo "✅ ပေါ့ပ်အပ်ကို ပိတ်နေပါပြီ..."
-adb shell input tap 540 920 
-sleep 2
 
-echo "🎉 လုပ်ဆောင်ချက် အားလုံး ပြီးမြောက်ပါပြီ။"
+# --- ၅။ ဆုလာဘ်များကို တစ်ခုချင်းစီ ကလစ်နှိပ်၍ Claim ခြင်း စနစ် ---
+echo -e "${GREEN}[🚀] စတင်၍ ဆုလာဘ်များကို တစ်ခုချင်းစီ (ခွာပြီး) လှမ်းနှိပ်နေပါပြီ...${NC}"
+
+# function တစ်ခုဆောက်ပြီး ပုံသေလုပ်ဆောင်ချက်ကို ပတ်ခိုင်းခြင်း (Code တိုသွားအောင်)
+claim_reward_sequence() {
+    local reward_num=$1
+    local list_y=$2 # စာရင်းထဲက Claim ခလုတ်နေရာ
+
+    echo -e "${PURPLE}--------------------------------------------------${NC}"
+    echo -e "${BLUE}[🎁] ဆုလာဘ် (${reward_num}) ရဲ့ 'Claim' ခလုတ်ကို နှိပ်လိုက်သည်...${NC}"
+    adb shell input tap 900 $list_y
+    sleep 3 # စာမျက်နှာအောက်ခြေက Claim ခလုတ်ကြီး တက်လာရန် ခဏစောင့်ခြင်း
+
+    echo -e "${BLUE}[🎯] အတွင်းထဲက အပြာရောင် 'Claim' ခလုတ်ကြီးကို ထပ်နှိပ်သည်...${NC}"
+    adb shell input tap 540 1850
+    sleep 3 # Error Popup တက်လာရန် ခဏစောင့်ခြင်း
+
+    echo -e "${BLUE}[🛑] Error Popup ကို ပိတ်ရန် 'Done' ခလုတ်ကို နှိပ်သည်...${NC}"
+    adb shell input tap 540 1850
+    sleep 2
+
+    echo -e "${BLUE}[↩️] စာရင်းထဲ ပြန်ရောက်ရန် ဘယ်ဘက်အပေါ်က 'Back' မျှားကို နှိပ်သည်...${NC}"
+    adb shell input tap 70 115
+    
+    echo -e "${YELLOW}[⏳] သတ်မှတ်ချက်အတိုင်း 15 စက္ကန့် ခြားပြီးမှ နောက်တစ်ခုကို ဆက်သွားပါမည်...${NC}"
+    sleep 15
+}
+
+# ဆုလာဘ် (၁) - ပထမဆုံး အတန်း
+claim_reward_sequence "1" "410"
+
+# ဆုလာဘ် (၂) - ဒုတိယ အတန်း
+claim_reward_sequence "2" "580"
+
+# ဆုလာဘ် (၃) - တတိယ အတန်း
+claim_reward_sequence "3" "740"
+
+# ဆုလာဘ် (၄) - စတုတ္ထ အတန်း
+claim_reward_sequence "4" "910"
+
+echo -e "${PURPLE}--------------------------------------------------${NC}"
+echo -e "${GREEN}[🎉] ဗီဒီယိုထဲက လုပ်ဆောင်ချက်အတိုင်း တစ်ခုချင်းစီကို အချိန် Delay အတိအကျဖြင့် Claim ပြီးပါပြီ!${NC}"
 
