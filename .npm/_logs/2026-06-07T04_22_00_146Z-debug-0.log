@@ -1,0 +1,54 @@
+0 verbose cli /data/data/com.termux/files/usr/bin/node /data/data/com.termux/files/usr/bin/npm
+1 info using npm@11.16.0
+2 info using node@v26.2.0
+3 silly config load:file:/data/data/com.termux/files/usr/lib/node_modules/npm/npmrc
+4 silly config load:file:/data/data/com.termux/files/home/.npmrc
+5 silly config load:file:/data/data/com.termux/files/usr/etc/npmrc
+6 verbose title npm install ccxt
+7 verbose argv "install" "ccxt"
+8 verbose logfile logs-max:10 dir:/data/data/com.termux/files/home/.npm/_logs/2026-06-07T04_22_00_146Z-
+9 verbose logfile /data/data/com.termux/files/home/.npm/_logs/2026-06-07T04_22_00_146Z-debug-0.log
+10 silly logfile done cleaning log files
+11 silly allow-scripts no package.json at prefix Could not read package.json: Error: ENOENT: no such file or directory, open '/data/data/com.termux/files/home/package.json'
+12 silly packumentCache heap:1174405120 maxSize:293601280 maxEntrySize:146800640
+13 silly idealTree buildDeps
+14 silly fetch manifest ccxt@*
+15 silly packumentCache full:https://registry.npmjs.org/ccxt cache-miss
+16 http fetch GET 200 https://registry.npmjs.org/npm 872ms
+17 http fetch GET 200 https://registry.npmjs.org/ccxt 1568ms (cache miss)
+18 silly packumentCache full:https://registry.npmjs.org/ccxt set size:undefined disposed:false
+19 silly placeDep ROOT ccxt@4.5.56 OK for:  want: *
+20 silly fetch manifest ws@^8.8.1
+21 silly packumentCache full:https://registry.npmjs.org/ws cache-miss
+22 http fetch GET 200 https://registry.npmjs.org/ws 425ms (cache miss)
+23 silly packumentCache full:https://registry.npmjs.org/ws set size:undefined disposed:false
+24 silly fetch manifest bufferutil@^4.0.1
+25 silly packumentCache full:https://registry.npmjs.org/bufferutil cache-miss
+26 http fetch GET 200 https://registry.npmjs.org/bufferutil 135ms (cache miss)
+27 silly packumentCache full:https://registry.npmjs.org/bufferutil set size:undefined disposed:false
+28 silly fetch manifest utf-8-validate@>=5.0.2
+29 silly packumentCache full:https://registry.npmjs.org/utf-8-validate cache-miss
+30 http fetch GET 200 https://registry.npmjs.org/utf-8-validate 123ms (cache miss)
+31 silly packumentCache full:https://registry.npmjs.org/utf-8-validate set size:undefined disposed:false
+32 silly placeDep ROOT ws@8.21.0 OK for: ccxt@4.5.56 want: ^8.8.1
+33 silly reify moves {}
+34 http cache ws@https://registry.npmjs.org/ws/-/ws-8.21.0.tgz 1ms (cache hit)
+35 silly tarball no local data for ws@https://registry.npmjs.org/ws/-/ws-8.21.0.tgz. Extracting by manifest.
+36 http cache ccxt@https://registry.npmjs.org/ccxt/-/ccxt-4.5.56.tgz 1ms (cache hit)
+37 silly tarball no local data for ccxt@https://registry.npmjs.org/ccxt/-/ccxt-4.5.56.tgz. Extracting by manifest.
+38 http fetch GET 200 https://registry.npmjs.org/ws/-/ws-8.21.0.tgz 313ms (cache miss)
+39 http fetch GET 200 https://registry.npmjs.org/ccxt/-/ccxt-4.5.56.tgz 14868ms (cache miss)
+40 info run ccxt@4.5.56 postinstall node_modules/ccxt node postinstall.js
+41 info run ccxt@4.5.56 postinstall { code: 0, signal: null }
+42 silly ADD node_modules/ws
+43 silly ADD node_modules/ccxt
+44 warn allow-scripts 1 package has install scripts not yet covered by allowScripts:
+44 warn allow-scripts   ccxt@4.5.56 (postinstall: node postinstall.js)
+44 warn allow-scripts
+44 warn allow-scripts Run `npm approve-scripts --allow-scripts-pending` to review, or `npm approve-scripts <pkg>` to allow.
+45 verbose cwd /data/data/com.termux/files/home
+46 verbose os Linux 5.10.236-android12-9-00003-gfb24cf99ad97-ab14313284
+47 verbose node v26.2.0
+48 verbose npm  v11.16.0
+49 verbose exit 0
+50 info ok

@@ -1,0 +1,29 @@
+import requests
+
+cookies = {
+    'bybit_lang': 'en-US',
+    'bybit_uid': '',
+    'csrf_token': 'abc123...',
+}
+-
+headers = {
+    'authority': 'api.bybit.com',
+    'accept': 'application/json',
+    'x-csrf-token': 'abc123...',
+    # ... အခြား headers
+}
+
+def claim_reward(reward_id):
+    response = requests.post(
+        'https://api.bybit.com/v5/rewards/claim',
+        cookies=cookies,
+        headers=headers,
+        json={'rewardId': reward_id}
+    )
+    return response.json()
+
+# Reward IDs ကို ကြိုတင်သိထားရန် (သို့) နောက်ထပ် API ကနေယူရန်
+reward_ids = ["12345", "67890"]  # ကိုယ်တွေ့ရှာထားတဲ့ ID
+for rid in reward_ids:
+    print(claim_reward(rid))
+    time.sleep(1)

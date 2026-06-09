@@ -1,0 +1,38 @@
+Metadata-Version: 2.1
+Name: curlconverter
+Version: 1.0.1
+Summary: The library is responsible for parsing a cURL request string and converting it into a Python dictionary containing the method, URL, headers, and data
+Author: Dmitrii Malygin
+Author-email: malygin.agency@gmail.com
+Requires-Python: >=3.6,<4.0
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Description-Content-Type: text/markdown
+
+Here's an example of how to use the curlconverter library:
+
+from curlconverter import CurlConverter
+
+# Example cURL command string
+curl_string = 'curl \'https://api.example.com\' -H \'Content-Type: application/json\' -d \'{"foo": "bar"}\''
+
+# Create an instance of CurlConverter with the cURL string
+curl_converter = CurlConverter(curl_string)
+
+# Convert the cURL string to a dictionary
+parsed_data = curl_converter.convert()
+
+# Print the parsed data
+print(parsed_data)
+
+
+Output:
+{'method': 'GET', 'url': 'https://api.example.com', 'headers': {'Content-Type': 'application/json'}, 'data': '{"foo": "bar"}'}
+
+
+In this example, we create an instance of CurlConverter with a cURL command string that makes a GET request to https://api.example.com with a Content-Type header and a JSON payload. We then call the convert() method on the instance to parse the cURL string and return a dictionary with the parsed data. Finally, we print the parsed data to the console.
